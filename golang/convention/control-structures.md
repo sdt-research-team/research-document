@@ -1,21 +1,45 @@
 # Control Structures
 
-## Table of content
+### Table of content
 
 [General](#general)\
 [If](#if)\
-[Redeclaration and reassignment](#redeclaration-and-reassignment)\
+[Redeclaration And Reassignment](#redeclaration-and-reassignment)\
 [For](#for)\
 [Switch](#switch)\
-[Type switch](#type-switch)
+[Type Switch](#type-switch)
 
-## General
+### General
 
-## If
+### If
+Basic usage
+```go
+if x > 0 {
+    return y
+}
+```
+_Note: No open & close parentheses "()" are required_
+\
+\
+\
+With initialization
+```go
+if err := Foo(); err != nil {
+    return err
+}
+```
 
 
-## Redeclaration and reassignment
 
 
-## Author
-Huynh Hong An
+
+### Redeclaration and reassignment
+
+### For
+
+### Switch 
+
+### Type Switch
+
+
+*<p style="text-align: end;">- Huynh Hong An -</p>*
