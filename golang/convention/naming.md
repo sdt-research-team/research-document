@@ -5,13 +5,57 @@
 [Package](#package)\
 [Interface](#interface)\
 [Getters](#getters)\
-[InterfaceNames](#interface names)\
-[MixedCaps](#mixedCaps)\
 [Semicolons](#semicolons)\
 
 
 ### Package
 Packages được sử dụng để tổ chức code sao cho việc đọc và tái sử dụng code dễ dàng hơn. Packages giúp phân chia code thành nhiều phần, do đó việc update ứng dụng cũng thuận tiện hơn.
+
+Tên một package nên được đặt một cách ngắn gọn và rõ nghĩa. Theo quy định chung của ngôn ngữ Golang thì nên dùng chuẩn Lower-case để đặt tên khi viết code trong Golang (bao gồm package, biến, hàm, ...)
+Lấy ví dụ những package trong thư viện golang thường là những danh từ đơn giản như:
+    - time (hỗ trợ các thao tác liên quan đến xử lý thời gian)
+    - list (dùng để dựng chuỗi liên kết đơn hoặc đôi)
+
+Đánh dấu `var`s và `const`s bằng token `_` để thể hiện đây là các biến được dùng global trong code.
+
+<table>
+<thead><tr><th>Bad</th><th>Good</th></tr></thead>
+<tbody>
+<tr><td>
+
+```go
+// foo.go
+
+const (
+  defaultPort = 8080
+  defaultUser = "user"
+)
+
+// bar.go
+
+func Bar() {
+  defaultPort := 9090
+  ...
+  fmt.Println("Default port", defaultPort)
+
+  // We will not see a compile error if the first line of
+  // Bar() is deleted.
+}
+```
+
+</td><td>
+
+```go
+// foo.go
+
+const (
+  _defaultPort = 8080
+  _defaultUser = "user"
+)
+```
+
+</td></tr>
+</tbody></table>
 
 ### Interface
 Trong Golang, một Interface sẽ được đặt tên theo 3 cách
@@ -19,6 +63,31 @@ Trong Golang, một Interface sẽ được đặt tên theo 3 cách
 - Khai báo Interface bằng tên phương thức muốn dùng kết hợp với prefix "I"
 - Khai báo Interface bằng tên phương thức muốn dùng kết hợp với "er", nhưng tùy biến với từng trường hợp. Ví dụ: có thể dùng "Reader" làm tên Interface mà không cần kết hợp thêm er ở sau cùng.
 
+### Semicolons
+Tương tự như ngôn ngữ C, Golang dùng ký tự `;` để kết thúc một dòng code, tuy nhiên điểm khác biệt là ký tự này không bắt buộc phải xuất hiện lúc viết code. Thay vào đó bộ compile của ngôn ngữ Go sẽ tự động thêm ký tự này vào dòng code.
+
+Nguyên tắc hoạt động của bộ compile như sau: nếu ký tự cuối cùng của dòng code là biến, là con số, ... hoặc là một trong những ký tự sau đây.
+
+```shell
+  break continue fallthrough return ++ -- ) }
+```
+
+Một trong những nguyên tắc là không được thêm ký tự `;` vào sau những từ khóa của câu điều kiện. Cấu trúc điều kiện nên được viết như thế này:
+
+```shell
+  if i < f() {
+    g()
+  }
+```
+
+Không nên như thế này
+
+```shell
+  if i < f()  // wrong!
+  {           // wrong!
+      g()
+  }
+```
 
 
 *<p style="text-align: end;">- Pham Quoc Dat -</p>*
