@@ -3,8 +3,8 @@
 ### Table of content
 
 [Package](#package)\
+[Variable](#variable)\
 [Interface](#interface)\
-[Getters](#getters)\
 [Semicolons](#semicolons)\
 
 
@@ -57,11 +57,98 @@ const (
 </td></tr>
 </tbody></table>
 
+#### Variable Naming Convention
+Tên biến trong Golang được viết theo chuẩn CamelCase, tuy nhiên đối với một vài từ khóa đặc biệt thì nên đặt tên theo các mẫu sau:
+
+Đây là danh sách những từ khóa nên được viết theo mẫu đặc biệt
+
+```go
+// A GonicMapper that contains a list of common initialisms taken from golang/lint
+var LintGonicMapper = GonicMapper{
+	"API":   true,
+	"ASCII": true,
+	"CPU":   true,
+	"CSS":   true,
+	"DNS":   true,
+	"EOF":   true,
+	"GUID":  true,
+	"HTML":  true,
+	"HTTP":  true,
+	"HTTPS": true,
+	"ID":    true,
+	"IP":    true,
+	"JSON":  true,
+	"LHS":   true,
+	"QPS":   true,
+	"RAM":   true,
+	"RHS":   true,
+	"RPC":   true,
+	"SLA":   true,
+	"SMTP":  true,
+	"SSH":   true,
+	"TLS":   true,
+	"TTL":   true,
+	"UI":    true,
+	"UID":   true,
+	"UUID":  true,
+	"URI":   true,
+	"URL":   true,
+	"UTF8":  true,
+	"VM":    true,
+	"XML":   true,
+	"XSRF":  true,
+	"XSS":   true,
+}
+```
+
+Đối với kiểu dữ liệu `bool` thì tên biến nên được bắt đầu bằng những từ khóa `Has`, `Is`, `Can` hoặc `Allow`, etc.
+
+Lấy ví dụ định nghĩa một struct theo quy tắc đặt tên biến
+
+```go
+	// Webhook represents a web hook object.
+	type Webhook struct {
+		ID           int64 `xorm:"pk autoincr"`
+		RepoID       int64
+		OrgID        int64
+		URL          string `xorm:"url TEXT"`
+		ContentType  HookContentType
+		Secret       string `xorm:"TEXT"`
+		Events       string `xorm:"TEXT"`
+		*HookEvent   `xorm:"-"`
+		IsSSL        bool `xorm:"is_ssl"`
+		IsActive     bool
+		HookTaskType HookTaskType
+		Meta         string     `xorm:"TEXT"` // store hook-specific attributes
+		LastStatus   HookStatus // Last delivery status
+		Created      time.Time  `xorm:"CREATED"`
+		Updated      time.Time  `xorm:"UPDATED"`
+	}
+```
+
+### Functions and Methods
+
+Tuân thủ theo nguyên tắc CamelCase, tuy nhiên nếu hàm trả về kiểu `bool` thì tên hàm nên được bắt đầu với những từ khóa `Has`, `Is`, `Can` hoặc `Allow`, etc.
+
+```go
+	func HasPrefix(name string, prefixes []string) bool { ... }
+	func IsEntry(name string, entries []string) bool { ... }
+	func CanManage(name string) bool { ... }
+	func AllowGitHook() bool { ... }
+	```
+
+### Constants
+Constants nên được đặt tất cả các ký tự bằng chữ viết hoa, và nên dùng ký tự `_` để phân biệt các từ.
+
+```go
+	const APP_VER = "0.7.0.1110 Beta"
+```
+
 ### Interface
 Trong Golang, một Interface sẽ được đặt tên theo 3 cách
-- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với "er" ở sau cùng
-- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với prefix "I"
-- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với "er", nhưng tùy biến với từng trường hợp. Ví dụ: có thể dùng "Reader" làm tên Interface mà không cần kết hợp thêm er ở sau cùng.
+- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với "er" ở sau cùng.
+- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với prefix "I".
+- Khai báo Interface bằng tên phương thức muốn dùng kết hợp với "er", nhưng tùy biến với từng trường hợp. Ví dụ: có thể dùng `Reader` làm tên Interface mà không cần kết hợp thêm er ở sau cùng.
 
 ### Semicolons
 Tương tự như ngôn ngữ C, Golang dùng ký tự `;` để kết thúc một dòng code, tuy nhiên điểm khác biệt là ký tự này không bắt buộc phải xuất hiện lúc viết code. Thay vào đó bộ compile của ngôn ngữ Go sẽ tự động thêm ký tự này vào dòng code.
