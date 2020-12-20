@@ -5,7 +5,7 @@
 [Package](#package)\
 [Variable](#variable)\
 [Interface](#interface)\
-[Semicolons](#semicolons)\
+[Semicolons](#semicolons)
 
 
 ### Package
@@ -57,7 +57,7 @@ const (
 </td></tr>
 </tbody></table>
 
-#### Variable Naming Convention
+### Variable Naming Convention
 Tên biến trong Golang được viết theo chuẩn CamelCase, tuy nhiên đối với một vài từ khóa đặc biệt thì nên đặt tên theo các mẫu sau:
 
 Đây là danh sách những từ khóa nên được viết theo mẫu đặc biệt
